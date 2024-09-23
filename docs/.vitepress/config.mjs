@@ -35,6 +35,7 @@ export default defineConfig({
           { text: 'Filters', link: '/server/filters' },
           { text: 'Context Injection', link: '/server/context-injection' },
           { text: 'Authentication and Authorization', link: '/server/authentication' },
+          { text: 'Exception handling', link: '/server/exception-handling' },
           { text: 'Memory Management', link: '/server/memory-management' },
           { text: 'CORS', link: '/server/cors' }
         ]
