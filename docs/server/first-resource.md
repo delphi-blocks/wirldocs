@@ -48,9 +48,9 @@ Now, if we are supposed to create a Delphi class that handles the resource, with
   end;
 ```
 
-What **WiRL** allows you to do is just take that class, as is, and make it accessible via *HTTP*. Obviously there are some things WiRL needs to know before making API publishing possible. Some are related to the general configuration of the application (the port, the message format, etc.) which were explained [here](../getting-started-with-server), and then there are some information related to the resource itself.
+What **WiRL** allows you to do is just take that class, as is, and make it accessible via *HTTP*. Obviously there are some things WiRL needs to know before making API publishing possible. Some are related to the general [configuration](configuration) of the application (the port, the message format, etc.), and then there are some information related to the resource itself.
 
-As you can see, we have inserted some comments in the class needed to understand how the class methods are associated with HTTP methods. This information must be accessible to *WiRL*, what we need to do is transform the comments into a series of attributes made available by the library:
+As you can see, we have inserted some comments in the class needed to understand how the class methods are associated with HTTP methods. This information must be accessible to *WiRL*, what we need to do is transform the comments into a series of [attributes](attributes) made available by the library:
 
 ```pascal
   [Path('user')]

@@ -83,7 +83,7 @@ end;
 
 This configuration defines an *application* that answers to URLs like this:
 
-> http://localhost:8080/rest/app/*<resource_path>*
+> htt<span>p://l</span>ocalhost:8080/rest/app/*<resource_path>*
 
 ### CurrentApp, CurrentEngine, BackToApp
 Even using the fluent interface when we want to configure more that one engine or app you are forced to save (and declare) the Engine and App objects. To avoid cluttering the configuration code you can use the utility methods:

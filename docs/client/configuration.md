@@ -6,7 +6,7 @@ Often WiRL is used only as a library to write ReST APIs. But since the first ver
 | -------------------- |:-------------------------:|
 | TWiRLServer          | TWiRLClient               | 
 | TWiRLApplication     | TWiRLClientApplication    |
-| Risorse (any class*) | TWiRLClientResource       |
+| Resource (any class*) | TWiRLClientResource       |
 | TWiRLFilterRegistry  | TWiRLClientFilterRegistry |
 | TMessageBodyReader** | TMessageBodyReader        |
 | TMessageBodyWriter** | TMessageBodyWriter        |
