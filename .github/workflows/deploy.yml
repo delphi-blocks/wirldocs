@@ -26,6 +26,6 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER_NAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          strip_components: 1
+          strip_components: 3
           source: docs/.vitepress/dist
           target: /var/web/wirl.delphiblocks.dev
