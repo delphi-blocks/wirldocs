@@ -4,16 +4,33 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "WiRL Project",
   description: "The Delphi RESTful Library",
+  lastUpdated: true,
   ignoreDeadLinks: [
     /^https?:\/\/localhost/
   ],
   head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
   themeConfig: {
+    search: {
+      provider: 'local'
+    },    
     // https://vitepress.dev/reference/default-theme-config
     logo: '/logo-image-only.png',
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Guides', link: '/introduction' },
+      {
+        text: '4.6.0',
+        items: [
+          {
+            text: 'Changelog',
+            link: 'https://github.com/delphi-blocks/WiRL/releases'
+          },
+          {
+            text: 'Discussions',
+            link: 'https://github.com/delphi-blocks/WiRL/discussions'
+          }
+        ]
+      }      
     ],
 
     sidebar: [

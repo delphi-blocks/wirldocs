@@ -166,7 +166,11 @@ Let's see an example of such configuration:
     .SetTokenType(TAuthTokenType.JWT)
     .SetTokenLocation(TAuthTokenLocation.Bearer);
 ```
+
+For more detail see [Authentication](authentication) guide.
+
 ### JWT configuration plugin
+
 The `IWiRLConfigurationJWT` interface let's you configure the JWT settings:
 - SetClaimClass
 - SetAlgorithm
@@ -184,6 +188,8 @@ Let's see an example of such configuration:
     .SetAlgorithm(TJOSEAlgorithmId.HS256)
     .SetSecret(TEncoding.UTF8.GetBytes(edtSecret.Text));
 ```
+
+For more detail see [Authentication](authentication) guide.
 
 ### JSON serializer (Neon) plugin 
 The `IWiRLConfigurationNeon` interface let's you configure the Neon settings:
@@ -206,3 +212,4 @@ Let's see an example of such configuration:
 
 ```
 
+For more detail see [Neon plugin](neon) documentation.

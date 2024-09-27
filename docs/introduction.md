@@ -5,24 +5,19 @@
 The main feature of WiRL is the mapping of any class in a web resource using some [attributes](server/attributes).
 
 ```pascal
-  [Path('/employee')]
-  TEmployeeResource = class
-  public
-    [GET]
-    [Produces(TMediaType.APPLICATION_JSON)]
-    function GetEmployee(): TJsonObject;
-    [PUT]
-    function UpdateEmployee([BodyParam] Employee: TJsonObject);
-    //....
-  end;  
+[Path('customers')]
+TCustomerResource = class
+public
+  [GET]
+  [Produces('TMediaType.APPLICATION_JSON')]
+  function SelectCustomers: TCustomerList;
+
+  [POST]
+  [Consumes('TMediaType.APPLICATION_JSON')]
+  [Produces('TMediaType.APPLICATION_JSON')]
+  function InsertCustomer(ACustomer: TCustomer): TCustomer;
+end;
 ```
 
 Every class decorated with the `[Path]` attribute and registered in the `TWiRLResourceRegistry` is a web resource associated with a specific path. The input parameters of the methods are read from the HTTP request, WiRL try to find the right parameter value using some built-in [attributes](server/attributes): `[PathParam]`, `[QueryParam]`, `[BodyParam]` and many others. Then inject the correct value into the parameters. If the parameter type is an object WiRL try to build the object using a [Message Body Reader](server/message-body) a special customizable class factory. The result type is handled in the same way but with a [Message Body Writer](server/message-body).
 
-## Features
-The key features of WiRL are:
-
-- [Easy server configuration](server/configuration)
-- [Writing your first resource](server/first-resource)
-- [Filters](server/filters)
-- [Context Injection](server/context-injection)

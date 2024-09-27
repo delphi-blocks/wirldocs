@@ -11,27 +11,9 @@ Before diving into the implementation details, it's essential to understand the 
 
 WiRL allows you to manage both aspects seamlessly.
 
-## Configuration
+## Configuring Authentication
 
-### Setting Up JWT Authentication
-
-To use JWT (JSON Web Token) for authentication, you need to configure WiRL as follows:
-
-```pascal
-.Plugin.Configure<IWiRLConfigurationJWT>
-  .SetClaimClass(TServerClaims)
-  .SetAlgorithm(TJOSEAlgorithmId.HS256)
-  .SetSecret(TEncoding.UTF8.GetBytes(MySecretKey))
-```
-
-This configuration:
-- Uses JWT tokens encoded with HS256 algorithm
-- Sets a secret key for token encryption
-- Specifies a custom claims class (`TServerClaims`) for additional token information
-
-### Configuring Authorization
-
-To set up authorization, specify where the token is located and its type:
+The `IWiRLConfigurationAuth` interface allows you to set up the basic authentication parameters for your application. Here's an example of a simple configuration:
 
 ```pascal
 .Plugin.Configure<IWiRLConfigurationAuth>
@@ -40,80 +22,74 @@ To set up authorization, specify where the token is located and its type:
   .BackToApp
 ```
 
-This setup uses JWT tokens in the Bearer header for authorization.
+This configuration sets up [JWT](https://jwt.io/) authentication with the token being passed with a Bearer authentication.  The client must send this token in the Authorization header when making requests to protected resources:
 
-## Implementing Authentication
-
-WiRL supports several authentication methods out of the box:
-
-1. Basic Auth
-2. Form-based authentication
-3. JSON-based authentication
-
-To implement any of these, create a class that inherits from the appropriate base class:
-
-- `TWiRLAuthBasicResource` for Basic Auth
-- `TWiRLAuthFormResource` for Form-based auth
-- `TWiRLAuthBodyResource` for JSON-based auth
-
-Then, implement the abstract `Authenticate` method:
-
-```pascal
-function Authenticate(const AUserName, APassword: string): TWiRLAuthResult; virtual; abstract;
+```http
+Authorization: Bearer <token>
 ```
 
-Here's an example implementation:
+However, `IWiRLConfigurationAuth` offers more options for fine-tuning your authentication. Each parameter is set using a corresponding `Set<ParameterName>` function. Here are the key parameters:
+
+### AuthChallenge
+
+The `SetAuthChallenge` method allows you to specify the type of challenge (Basic, Digest, Bearer, or Form) and the authentication realm when the access is denied.
+
+### AuthChallengeHeader
+
+Sets the name of the header where the challenge will be inserted. Default is 'WWW-Authenticate'.
+
+### TokenType
+
+Specifies the type of token to be used. Currently, only JWT is supported.
+
+### TokenLocation
+
+Defines where WiRL should look for the authentication token. Options: Bearer (in Authorization header), Cookie, Header (custom header).
+
+### TokenCustom
+
+When `SetTokenLocation` is set to Header, this specifies the name of the custom header.
+
+## JWT Configuration
+
+For applications using JWT, the `IWiRLConfigurationJWT` interface provides additional configuration options. Here's a basic example:
 
 ```pascal
-function TFormAuthResource.Authenticate(const AUserName, APassword: string): TWiRLAuthResult;
-begin
-  // Verify credentials (replace with your authentication logic)
-  Result.Success := SameText(APassword, 'mypassword');
-
-  // Assign roles based on username (replace with your role assignment logic)
-  if SameText(AUserName, 'admin') or SameText(AUserName, 'paolo') then
-    Result.Roles := 'user,manager,admin'.Split([','])
-  else
-    Result.Roles := 'user,manager'.Split([',']);
-
-  // Set JWT claims
-  Subject.Expiration := IncSecond(Now(), 30);
-  Subject.UserID := AUserName;
-
-  // Set custom claims if needed
-  Subject.Language := 'en-US';
-end;
+.Plugin.Configure<IWiRLConfigurationJWT>
+  .SetClaimClass(TServerClaims)
+  .SetAlgorithm(TJOSEAlgorithmId.HS256)
+  .SetSecret(TEncoding.UTF8.GetBytes(MySecretKey))
 ```
 
-This method should:
-1. Verify the provided credentials
-2. Set the `Success` property of the result
-3. Assign appropriate roles
-4. Set any additional claims for the JWT token
+This sets up JWT with a custom claims class, using the HS256 algorithm and a specified secret key. Let's explore the available configuration methods:
 
-## Implementing Authorization
+### VerificationMode
 
-Once authentication is set up, you can use attributes to control access to your API methods:
+Determines how the token should be processed. Options: `Verify` (default): Fully validate the token; `Deserialize`: Only deserialize the token without validation.
 
-- `[PermitAll]`: Allows access to any authenticated user
-- `[DenyAll]`: Blocks access to all users
-- `[RolesAllowed('role1,role2')]`: Specifies which roles can access the method
+### ClaimClass
 
-Example usage:
+Specifies a custom class for JWT claims. Must be derived from `TWiRLSubject`. Default: `TWiRLSubject`.
 
-```pascal
-[POST, RolesAllowed('admin,manager')]
-[Produces(TMediaType.APPLICATION_JSON)]
-function InsertUser([BodyParam] AUser: TUserInfo): TUserInfo;
-```
+### Algorithm
 
-This example restricts the `InsertUser` method to users with either the 'admin' or 'manager' role.
+Sets the algorithm for generating and verifying JWT tokens. Options include HS256, HS384, HS512, RS256, RS384, RS512, ES256, ES384, ES512, PS256, PS384, PS512.
 
-## Retrieving Token Information
+### Secret
+For HMAC-based algorithms (HS256, HS384, HS512). Directly set the secret key as bytes or provide a function to generate it.
 
-In some cases, it can be useful to access additional information about the token. WiRL allows you to retrieve both the custom claim class defined in the configuration and information about the token itself through context injection.
+### PublicKey
 
-To access token information within your resource classes, you can use the `[Context]` attribute to inject the necessary objects. Here's an example:
+For RSA-based algorithms. Sets the public key for token verification.
+
+### PrivateKey
+
+For RSA-based algorithms. Sets the private key for token signing.
+
+
+## Introduction to WiRL Authorization
+
+WiRL uses a decorator-style approach to define authorization rules. You can apply these decorators at the method level to control access to specific endpoints. Let's look at an example to see how this works in practice:
 
 ```pascal
 [Path('user')]
@@ -124,11 +100,51 @@ protected
   // Injects the custom claims into "Subject" object
   [Context] Subject: TServerClaims;
 public
-  // Resource implementation
+  [GET]
+  [Produces(TMediaType.APPLICATION_JSON)]
+  function PublicInfo: TUserInfo;
+
+  [POST, RolesAllowed('admin,manager')]
+  [Produces(TMediaType.APPLICATION_JSON)]
+  function InsertUser([BodyParam] AUser: TUserInfo): TUserInfo;
+
+  [GET, Path('/details'), RolesAllowed('admin')]
+  [Produces(TMediaType.APPLICATION_JSON)]
+  function DetailsInfo: TDetailsInfo;
 end;
 ```
 
-In this example:
+In this example, we define a `TUserResource` class with three methods, each with different authorization levels:
 
-- `TServerClaims` allows you to read all claims related to the token sent by the client (if available).
-- `TWiRLAuthContext` provides information about the token itself, such as the token string and its validity.
+1. `PublicInfo`: This method has no authorization attributes, making it publicly accessible.
+2. `InsertUser`: This method is decorated with `[RolesAllowed('admin,manager')]`, restricting access to users with either the 'admin' or 'manager' role.
+3. `DetailsInfo`: This method is decorated with `[RolesAllowed('admin')]`, allowing access only to users with the 'admin' role.
+
+## Available Authorization Attributes
+
+WiRL provides three main attributes for controlling access to your resources:
+
+1. `PermitAll`: This attribute allows access to the decorated method for any authenticated user. It's useful for endpoints that require authentication but don't need role-based restrictions.
+
+2. `DenyAll`: This attribute blocks access to the decorated method for all users, regardless of their authentication status or roles. It's helpful when you want to temporarily disable an endpoint or restrict it entirely.
+
+3. `RolesAllowed`: This attribute allows you to specify one or more roles that are permitted to access the decorated method. You can provide multiple roles as a comma-separated list, as seen in the `InsertUser` method above.
+
+## Accessing Authentication Context and Claims
+
+WiRL can [inject](context-injection) authentication-related objects directly into your resource class, giving you access to important information about the current request's authentication status and the authenticated user's claims.
+
+In the example above, we see two protected fields decorated with the `[Context]` attribute:
+
+```pascal
+[Context] Auth: TWiRLAuthContext;
+[Context] Subject: TServerClaims;
+```
+
+1. `Auth: TWiRLAuthContext`: This object contains information about the authentication state of the current request, including details about token validity, token type, and other authentication-related metadata.
+
+2. `Subject: TServerClaims`: This object represents the deserialized token, containing the actual claims of the authenticated user. In this example, we're using a custom `TServerClaims` type, which must be derived from `TWiRLSubject`.
+
+By injecting these objects, you can easily access authentication and user information within your resource methods. This allows you to implement more complex authorization logic beyond simple role-based access control if needed.
+
+
