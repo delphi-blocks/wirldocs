@@ -29,3 +29,8 @@ jobs:
           strip_components: 3
           source: docs/.vitepress/dist
           target: /var/web/wirl.delphiblocks.dev
+      - name: Cloudflare Cache Cleaner
+        uses: Cyb3r-Jak3/action-cloudflare-cache@v2.0.0
+        with:
+          zone: ${{ secrets.CF_ZONE_ID }}
+          api_token: ${{ secrets.CF_API_TOKEN }}
