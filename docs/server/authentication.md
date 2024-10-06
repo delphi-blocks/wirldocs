@@ -1,6 +1,6 @@
 # Authentication and Authorization
 
-WiRL offers a robust and flexible system for handling both authentication and authorization in your API. While it's possible to create custom authentication processes using [filters](filters) and [context injection](context-injection) (see example *12.Context*), WiRL also provides several classes that significantly simplify the developer's work. This guide will walk you through the process of setting up and using these features effectively.
+WiRL offers a robust and flexible system for handling both authentication and authorization in your API. While it's possible to create custom authentication processes using [filters](filters) and [context injection](context-injection) (see example *12.Context*), WiRL also provides several classes that significantly simplify the developer's work. 
 
 ## Understanding Authentication vs. Authorization
 
@@ -49,6 +49,86 @@ Defines where WiRL should look for the authentication token. Options: Bearer (in
 ### TokenCustom
 
 When `SetTokenLocation` is set to Header, this specifies the name of the custom header.
+
+## Authentication Process Overview
+
+The authentication process in WiRL primarily consists of two phases:
+
+1. User recognition
+2. Role assignment
+
+While WiRL allows you to define these phases manually, it also offers streamlined solutions for common scenarios, such as username/password authentication and JWT (JSON Web Token) role management.
+
+## Standard Authentication Resources
+
+WiRL provides several high-level classes that handle most of the work for standard authentication schemes. Let's explore these options:
+
+### 1. TWiRLAuthBasicResource
+
+Use this class when your authentication is based on [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication). 
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Server
+    Client->>Server: GET / HTTP/1.1
+    Server->>Client: 401 Unathorized <br/>WWW-Authenticate:  Basic realm="User Visible Realm"
+    note right of Client: Ask user
+    Client->>Server: Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+    Server->>Client: 200 OK
+```
+
+Here's how to implement it:
+
+```pascal
+[Path('basic_auth')]
+TBasicAuthResource = class(TWiRLAuthBasicResource)
+private
+  // Injects the custom claims into "Subject" field
+  [Context] Subject: TServerClaims;
+protected
+  function Authenticate(const AUserName, APassword: string): TWiRLAuthResult; override;
+end;
+```
+
+In this example, `Subject` represents the JWT token. It can be of type `TWiRLSubject` or a derived class if you need custom attributes.
+
+Here's an example implementation of the `Authenticate` method:
+
+```pascal
+function TFormAuthResource.Authenticate(const AUserName, APassword: string): TWiRLAuthResult;
+begin
+  // Replace this with your actual server authentication logic
+  Result.Success := SameText(APassword, 'mypassword');
+  
+  // Assign roles based on the username (replace with your actual role assignment logic)
+  if SameText(AUserName, 'admin') or SameText(AUserName, 'paolo') then
+    Result.Roles := 'user,manager,admin'.Split([','])
+  else
+    Result.Roles := 'user,manager'.Split([',']);
+  
+  // Set JWT claims
+  Subject.Expiration := IncSecond(Now(), 30);
+  Subject.UserID := AUserName;
+  
+  // Set custom JWT claims
+  Subject.Language := 'it-IT';
+end;
+```
+
+This method verifies the username and password, sets the appropriate roles, and configures the JWT claims.
+
+### 2. TWiRLAuthFormResource
+
+This class is similar to `TWiRLAuthBasicResource`, but it retrieves the username and password from the HTTP request body, assuming they're in `www-form-urlencoded` format. The `Authenticate` method implementation is similar to the previous example.
+
+### 3. TBodyAuthResource
+
+This class follows the same principle but expects the username and password to be sent in the request body as JSON.
+
+## Custom Authentication
+
+For scenarios that require a completely different authentication system, possibly without using a username and password, you have the flexibility to implement your own solution. It can be helpful to examine the implementation of the classes mentioned above as a reference for creating your custom authentication logic.
 
 ## JWT Configuration
 
@@ -129,6 +209,8 @@ WiRL provides three main attributes for controlling access to your resources:
 2. `DenyAll`: This attribute blocks access to the decorated method for all users, regardless of their authentication status or roles. It's helpful when you want to temporarily disable an endpoint or restrict it entirely.
 
 3. `RolesAllowed`: This attribute allows you to specify one or more roles that are permitted to access the decorated method. You can provide multiple roles as a comma-separated list, as seen in the `InsertUser` method above.
+
+> **ATTENTION**: When a JWT token is sent in a request, WiRL only checks its validity (HMAC or RSA). After that, it verifies if the resource has the aforementioned attributes. It's crucial to remember that WiRL does not verify any claims in the token, not even the expiration. Therefore, if additional checks are necessary, it is recommended to use a [filter](/server/filters). Keep in mind that in filters, you can use [context injection](/server/context-injection), for example, to inject the JWT token for further processing.
 
 ## Accessing Authentication Context and Claims
 
