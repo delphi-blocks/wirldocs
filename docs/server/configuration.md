@@ -4,8 +4,13 @@ A WiRL application is basically an HTTP server with a routing system that follow
 
 ## Fluent interface
 To configure WiRL you can use the [fluent interface style](https://en.wikipedia.org/wiki/Fluent_interface). The configuration methods return always the Self object so you can call another configuration method on the Result itself.
-The main advantage of this technique is to avoid to declare object and sub objects only to configure them. Let me show you an example of the configuration using the fluent interface:
-```pascal
+The main advantage of this technique is to avoid to declare object and sub objects only to configure them. 
+
+Let me show you an example of the configuration using the fluent interface or a more "classic" style:
+
+::: code-group
+
+```pascal [fluent]
 procedure TMainForm.ConfigureServerFluent(AServer: TWiRLServer);
 begin
   // Server & Apps configuration
@@ -41,9 +46,8 @@ begin
 end;
 
 ```
-Of course you can use the usual "Delphi" style to configure WiRL:
 
-```pascal
+```pascal [classic]
 procedure TMainForm.ConfigureServer(AServer: TWiRLServer);
 var
   LEngineConf: TWiRLEngine;
@@ -80,6 +84,7 @@ begin
   LJWTConf.SetSecret(TEncoding.UTF8.GetBytes(edtSecret.Text));
 end;
 ```
+:::
 
 This configuration defines an *application* that answers to URLs like this:
 
