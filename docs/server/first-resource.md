@@ -96,7 +96,9 @@ In this way *WiRL* has all the information it needs.
 
 The `WiRL.Core.Attributes` unit has several attributes, here we will only see those relating to the definition of resources.
 
-> **Warning** : if you forget to add the unit with the definition of the attributes Delphi will generate a *Warning*: `W1074 Unknown custom attribute`. The program will still compile but will not work. **From Delph 10.3 you can transform the Warning into an error in the Delphi options or for a single project**.
+::: warning
+If you forget to add the unit with the definition of the attributes Delphi will generate a *Warning*: `W1074 Unknown custom attribute`. The program will still compile but will not work. **From Delph 10.3 you can transform the Warning into an error in the Delphi options or for a single project**.
+:::
 
 **Attribute**: `Path`
 

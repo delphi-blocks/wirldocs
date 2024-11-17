@@ -3,7 +3,9 @@
 One of WiRL's distinctive features is its ability to let developers write **ordinary classes** using standard native objects and types, and then "remotize" the methods of these classes. To understand how these methods should be used in the context of a REST call, WiRL relies on a series of Attributes that must be applied to the **class**, its **methods**, and **parameters**.
 These attributes are found in the WiRL.Core.Attributes unit, and we'll analyze them in detail in the following sections.
 
-> **Warning** : if you forget to add the unit with the definition of the attributes Delphi will generate a *Warning*: `W1074 Unknown custom attribute`. The program will still compile but will not work. **From Delph 10.3 you can transform the Warning into an error in the Delphi options or for a single project**.
+::: warning
+If you forget to add the unit with the definition of the attributes Delphi will generate a *Warning*: `W1074 Unknown custom attribute`. The program will still compile but will not work. **From Delph 10.3 you can transform the Warning into an error in the Delphi options or for a single project**.
+:::
 
 **Attribute**: `Path`
 
