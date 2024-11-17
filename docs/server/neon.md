@@ -2,6 +2,10 @@
 
 [Neon](https://github.com/paolo-rossi/delphi-neon) is a powerful serialization library for Delphi that facilitates the conversion of objects and other values to and from JSON. It supports simple Delphi types as well as complex classes and records.
 
+::: tip DEMO
+You can find a demo demonstrating how serialize complex objects in the `demo\13.Serialization` folder.
+:::
+
 ## WiRL and Neon Integration
 
 WiRL seamlessly integrates with Neon through its default [MessageBody readers and writers](message-body). This integration allows automatic serialization and deserialization of objects in request bodies and response returns.

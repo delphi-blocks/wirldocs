@@ -2,6 +2,10 @@
 
 WiRL offers a robust and flexible system for handling both authentication and authorization in your API. While it's possible to create custom authentication processes using [filters](filters) and [context injection](context-injection) (see example *12.Context*), WiRL also provides several classes that significantly simplify the developer's work. 
 
+::: tip DEMO
+You can find a demo demonstrating how to handle authentication and authorization in the `demo\03.Authorization` folder.
+:::
+
 ## Understanding Authentication vs. Authorization
 
 Before diving into the implementation details, it's essential to understand the difference between these two concepts:

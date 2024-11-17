@@ -79,3 +79,7 @@ initialization
 ```
 
 So you need to define your class, a factory that is capable of creating the class and register both classes. The interesting part is that in the *CreateContext* method of the factory you have a reference to `TWiRLContext`, so basically you have access to the HTTP request (and much more information) and you can create the class accordingly.
+
+::: tip DEMO
+You can find a more advanced example demonstrating how to use filters and context injection to create persistent sessions in the `demo\12.Context` folder.
+:::

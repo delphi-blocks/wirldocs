@@ -10,6 +10,10 @@ Filters can intercept requests and responses and do whatever you want:
 
 and many more.
 
+::: tip DEMO
+You can find a demo demonstrating how to create various types of filters in the `demo\10.Filters` folder.
+:::
+
 ## Getting started
 
 ### Response filters

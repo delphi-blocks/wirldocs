@@ -2,6 +2,10 @@
 
 WiRL provides a robust mechanism for handling exceptions in your web applications. This guide will walk you through the various ways you can manage and customize error responses.
 
+::: tip DEMO
+You can find a demo demonstrating how to customize exception handling in the `demo\20.Exceptions` folder.
+:::
+
 ## Default Exception Handling
 
 By default, when an exception is raised in a WiRL application, it generates a 500 HTTP status code. The response body will be a JSON object with the following structure:

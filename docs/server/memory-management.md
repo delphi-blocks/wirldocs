@@ -2,6 +2,10 @@
 
 In most scenarios, **WiRL handles memory management automatically**, freeing developers from the burden of manual object cleanup. However, there are specific cases where understanding and intervening in the memory management process becomes crucial. This guide will explore these particular situations, helping you prevent memory leaks and avoid the unintended destruction of objects that need to persist.
 
+::: tip DEMO
+You can find a demo demonstrating how to use the WiRL memory manager in the `demo\21.GarbageCollector` folder.
+:::
+
 ## Basic Concept
 
 When writing REST resources with WiRL, you typically create methods that return objects. For example:
