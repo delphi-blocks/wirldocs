@@ -37,7 +37,14 @@ export default withMermaid(
         {
           text: "Guide",
           items: [
-            { text: "Introduction", link: "/introduction" },
+            { 
+              text: "Introduction", 
+              link: "/introduction" 
+            },
+            { 
+              text: "Project Structure", 
+              link: "/structure" 
+            },
             {
               text: "Getting started with Server",
               link: "/getting-started-with-server",
@@ -67,6 +74,7 @@ export default withMermaid(
             },
             { text: "Exception handling", link: "/server/exception-handling" },
             { text: "Memory Management", link: "/server/memory-management" },
+            { text: "OpenAPI Documentation", link: "/server/openapi" },
             { text: "CORS", link: "/server/cors" },
           ],
         },
