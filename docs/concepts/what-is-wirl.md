@@ -1,11 +1,8 @@
 # WiRL: Delphi RESTful Library
 
-<br />
-<p align="center">
-  <img src="/logo.png" alt="Delphi RESTful Library" width="200" />
-</p>
+![Delphi RESTful Library](/logo.png){class=center-25}
 
-## What is WiRL?
+## WiRL: What it is
 
 **WiRL** was created to simplify [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) service implementation in Delphi but, more importantly, to enable maximum interoperability with REST clients written in other languages and tools.
 
@@ -33,3 +30,10 @@ WiRL uses 3 submodules:
 1. [Delphi JOSE and JWT Library](https://github.com/paolo-rossi/delphi-jose-jwt) for the JSON Web Token creation and validation
 2. [Neon - Serialization Library for Delphi](https://github.com/paolo-rossi/delphi-neon) to convert Delphi simple types, objects, records, arrays, etc... to the JSON format
 3. [OpenAPI 3 for Delphi](https://github.com/paolo-rossi/OpenAPI-Delphi) for the OpenAPI documentation generation
+
+## WiRL: What it's not
+
+WiRL is not a general purpose http/communication framework, instead it tries to fully adhere the the REST architectural style enabling the 6 REST constraints and enforcing through it's structure, attributes and examples a **REST clean code** style.
+
+Although it has several feature TDataSet-related, WiRL is not a mere "Delphi TDataSet remoting framework", allowing a more open communication concept between the server and the clients.
+

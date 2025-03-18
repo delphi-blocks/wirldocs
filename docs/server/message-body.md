@@ -33,7 +33,7 @@ MessageBody Readers and Writers are crucial components in WiRL, serving as the b
 
 An application can provide an implementation of the `IMessageBodyReader` interface by implementing the `ReadFrom()` method to map the entity to the desired Delphi type.
 
-The following figure shows how the MessageBodyReader reads an InputStream object and converts it to a user-defined Delphi object.
+The following figure shows how the MessageBodyReader reads a Request Stream and converts it to a user-defined Delphi object.
 
 ![MessageBodyReader](/mbr.png){class=center}
 
