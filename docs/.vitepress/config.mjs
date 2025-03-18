@@ -62,14 +62,14 @@ export default withMermaid(
             { text: "Configuration", link: "/server/configuration" },
             { text: "Attributes", link: "/server/attributes" },
             {
-              text: "Message body reader and writer",
+              text: "Entity Providers",
               link: "/server/message-body",
             },
             { text: "Neon plugin", link: "/server/neon" },
             { text: "Filters", link: "/server/filters" },
             { text: "Context Injection", link: "/server/context-injection" },
             {
-              text: "Authentication and Authorization",
+              text: "Authentication & Authorization",
               link: "/server/authentication",
             },
             { text: "Exception handling", link: "/server/exception-handling" },

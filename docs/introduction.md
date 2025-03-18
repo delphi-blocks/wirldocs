@@ -1,8 +1,55 @@
 # Introduction
 
-**WiRL** is an attempt to write a simple [ReST](https://en.wikipedia.org/wiki/Representational_state_transfer) library in Delphi using the new features of the language (such as generics, anonymous methods, attributes, record helpers and so on). It's inspired by the [JAX-RX specification](https://jax-rs-spec.java.net/), the "de facto" standard in the Java world to build a ReST API.
+![Delphi RESTful Library](/logo.png){class=center-25}
 
-The main feature of WiRL is the mapping of any class in a web resource using some [attributes](server/attributes).
+**WiRL** is an attempt to write a simple [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) library in Delphi using the new features of the language (such as generics, anonymous methods, attributes, record helpers and so on).
+
+## JAX-RS
+
+WiRL it's inspired by the Java API for RESTful Web Services ([JAX-RX](https://jax-rs-spec.java.net/)), the "de facto" standard in the Java world to build a REST API.
+
+The goals of the JAX-RS API (and therefore also WiRL) are:
+
+- `POJO-based`: To provide a collection of classes and associated annotations to be used with POJOs so as to expose them as Web resources.
+
+- `HTTP-centric`: To use HTTP as the underlying network protocol and provide a clear mapping between HTTP and URI elements and the corresponding API classes and annotations.
+
+- `Content Negotaition`: To be applicable to a wide variety of HTTP entity body content types and provide the necessary pluggability to allow additional types to be added.
+
+The main components of a JAX-RS (and WiRL) are:
+
+- MessageBody Readers & Writers (Clients & Servers)
+- Filters (Clients & Servers)
+- Annotations (Attributes)
+- POJO for resources
+- Serializer Engine for Entities
+- HTTP verbs as actions
+- Pluggable Auth 
+
+## WiRL Main Features
+
+WiRL wants to be a standard and clean way to build true RESTful services. WiRL tries to adhere to the famous 6 constraint of REST:
+
+![REST Constraints](/rest-constraints.png){class=center}
+
+1. Client/Server
+1. Stateless
+1. Cache
+1. Uniform interface
+1. Layered system
+1. Code on demand (optional)
+
+If your service adheres to the mentioned constrains, it will benefit from the following properties:
+
+- Scalability of components
+- Reliability in the resistance to failure
+- Visibility of communication between components
+- Simplicity of a uniform interface
+- Portability of components by moving program code with the data
+- Modifiability of components to meet changing needs
+- Performance in component interactions
+
+The main feature of WiRL is the mapping of a Delphi class in a web resource using some [attributes](server/attributes).
 
 ```pascal
 [Path('customers')]

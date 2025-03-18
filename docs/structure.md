@@ -97,7 +97,7 @@ The file `WiRL.Postman.Collection.json` contains a collection of requests that y
 
 ![Postman WiRL Collection](/postman-collection.png){class=center}
 
-With this collection you can test right away the WiRL code of the Demos!
+Now, using this collection you can test right away the WiRL code of the Demos!
 
 ## The `Tests` folder
 
