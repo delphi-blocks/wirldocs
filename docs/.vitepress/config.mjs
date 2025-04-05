@@ -38,6 +38,7 @@ export default withMermaid(
           text: "WiRL Concepts",
           items: [
             { text: "Introduction", link: "/concepts/introduction" },
+            { text: "WiRL Features", link: "/concepts/features" },
             { text: "Project Structure", link: "/concepts/structure" },
           ],
         },

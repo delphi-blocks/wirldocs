@@ -1,4 +1,4 @@
-# WiRL: Project Structure
+# Project Structure
 
 ![Delphi RESTful Library](/logo.png){class=center-25}
 
