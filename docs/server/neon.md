@@ -8,7 +8,7 @@ You can find a demo demonstrating how serialize complex objects in the `demo\13.
 
 ## WiRL and Neon Integration
 
-WiRL seamlessly integrates with Neon through its default [MessageBody readers and writers](message-body). This integration allows automatic serialization and deserialization of objects in request bodies and response returns.
+WiRL seamlessly integrates with Neon through its default [Entity Providers](entity-providers). This integration allows automatic serialization and deserialization of objects in request bodies and response returns.
 
 ## Configuring Neon in WiRL
 
@@ -44,8 +44,8 @@ Controls how property names are formatted in JSON:
 - `UpperCase`: Converts to all uppercase (PROPERTYNAME)
 - `PascalCase`: Capitalizes the first letter of each word (PropertyName)
 - `CamelCase`: Like PascalCase, but keeps the first letter lowercase (propertyName)
-- `SnakeCase`: Separates words with underscores (Property_Name)
-- `KebabCase`: Separates words with hyphens (Property-Name)
+- `SnakeCase`: Separates words with underscores (property_name)
+- `KebabCase`: Separates words with hyphens (property-name)
 - `ScreamingSnakeCase`: Like SnakeCase, but in all uppercase (PROPERTY-NAME)
 - `CustomCase`: Uses a custom function specified by `MemberCustomCase`
 

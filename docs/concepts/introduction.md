@@ -10,11 +10,11 @@ WiRL it's inspired by the Java API for RESTful Web Services ([JAX-RX](https://ja
 
 The goals of the JAX-RS API (and therefore also WiRL) are:
 
-- `POJO-based`: To provide a collection of classes and associated annotations to be used with POJOs so as to expose them as Web resources.
+- `POJO-based`: To provide a collection of classes and associated annotations to be used with POJOs (Plain Old Java Object) so as to expose them as Web resources.
 
 - `HTTP-centric`: To use HTTP as the underlying network protocol and provide a clear mapping between HTTP and URI elements and the corresponding API classes and annotations.
 
-- `Content Negotaition`: To be applicable to a wide variety of HTTP entity body content types and provide the necessary pluggability to allow additional types to be added.
+- `Content Negotiation`: To be applicable to a wide variety of HTTP entity body content types and provide the necessary pluggability to allow additional types to be added.
 
 The main components of a JAX-RS (and WiRL) are:
 
@@ -28,7 +28,7 @@ The main components of a JAX-RS (and WiRL) are:
 
 ## WiRL Main Features
 
-WiRL wants to be a standard and clean way to build true RESTful services. WiRL tries to adhere to the famous 6 constraint of REST:
+WiRL wants to be a standard and clean way to build true RESTful services adhering to the famous 6 constraint of the REST Architecure:
 
 ![REST Constraints](/rest-constraints.png){class=center}
 
@@ -39,7 +39,7 @@ WiRL wants to be a standard and clean way to build true RESTful services. WiRL t
 1. Layered system
 1. Code on demand (optional)
 
-If your service adheres to the mentioned constrains, it will benefit from the following properties:
+if your service adopts the above constraints, it will benefit from the following properties:
 
 - Scalability of components
 - Reliability in the resistance to failure
@@ -49,7 +49,7 @@ If your service adheres to the mentioned constrains, it will benefit from the fo
 - Modifiability of components to meet changing needs
 - Performance in component interactions
 
-The main feature of WiRL is the mapping of a Delphi class in a web resource using some [attributes](server/attributes).
+The main feature of WiRL is the mapping of a Delphi class in a web resource using some [attributes](/server/attributes).
 
 ```pascal
 [Path('customers')]
@@ -66,5 +66,5 @@ public
 end;
 ```
 
-Every class decorated with the `[Path]` attribute and registered in the `TWiRLResourceRegistry` is a web resource associated with a specific path. The input parameters of the methods are read from the HTTP request, WiRL try to find the right parameter value using some built-in [attributes](server/attributes): `[PathParam]`, `[QueryParam]`, `[BodyParam]` and many others. Then inject the correct value into the parameters. If the parameter type is an object WiRL try to build the object using a [Message Body Reader](server/message-body) a special customizable class factory. The result type is handled in the same way but with a [Message Body Writer](server/message-body).
+Every class decorated with the `[Path]` attribute and registered in the `TWiRLResourceRegistry` is a web resource associated with a specific path. The input parameters of the methods are read from the HTTP request, WiRL try to find the right parameter value using some built-in [attributes](/server/attributes): `[PathParam]`, `[QueryParam]`, `[BodyParam]` and many others. Then inject the correct value into the parameters. If the parameter type is an object WiRL try to build the object using a [Message Body Reader](/server/message-body) a special customizable class factory. The result type is handled in the same way but with a [Message Body Writer](/server/message-body).
 

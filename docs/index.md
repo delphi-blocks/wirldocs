@@ -12,13 +12,13 @@ hero:
   actions:
     - theme: brand
       text: What is WiRL?
-      link: /what-is-wirl
+      link: /concepts/what-is-wirl
     - theme: alt
       text: WiRL Server
-      link: /getting-started-with-server
+      link: /server/tutorial/getting-started
     - theme: alt
       text: WiRL Client
-      link: /getting-started-with-client
+      link: /client/tutorial/getting-started
 
 features:
   - title: Simplicity

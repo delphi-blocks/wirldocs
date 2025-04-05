@@ -1,4 +1,4 @@
-# Request and response filters
+# Filters for Requests and Responses
 
 Filters can intercept requests and responses and do whatever you want:
 

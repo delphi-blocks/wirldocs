@@ -1,4 +1,4 @@
-# Request handling
+# Request Handling
 
 ## TWiRLClientResource
 

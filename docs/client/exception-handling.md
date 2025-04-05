@@ -1,4 +1,4 @@
-# Exception handling
+# Exception Handling
 
 In case of protocol errors (status code 400 or 500) the calls to the server raise an exception of type `EWiRLClientProtocolException` this object, in addition to the error message, contains the entire response of the server (in the `Response` property); it is therefore possible to retrieve any information returned by the server.
 
