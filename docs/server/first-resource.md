@@ -120,7 +120,7 @@ This attribute must be applied to a class, in that way WiRL will consider it a r
 
 In this example the `/user` path will be accessible via the path GetUser method. In the second example the path contains a **template** `Path('{id}/todo')`. Templates are strings that contain variable parts (in this case id) that are accessible to the method via the attribute `PathParam` explained below. This method will then be accessible from URLs like `/user/12/todo` or `/user/lminuti/todo`.
 
-However, the full URL of the resource will also depend on the configuration set to `TWiRLServer`, `TWiRLEngine` and `TWiRLApplication` as explained [here](../getting-started-with-server).
+However, the full URL of the resource will also depend on the configuration set to `TWiRLServer`, `TWiRLEngine` and `TWiRLApplication` as explained [here](/server/tutorial/getting-started).
 
 ![Url](/WiRLURL.png)
 

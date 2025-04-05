@@ -8,7 +8,7 @@
 
 WiRL takes after Java [JAX-RS](https://jax-rs-spec.java.net/) specifications and tries to be compliant with the 6 REST constraints.
 
-WiRL is a high-level REST framework exposing plain Delphi objects (PODO) as RESTful web resources by applying [attributes](server/attributes) to these classes.
+WiRL is a high-level REST framework exposing plain Delphi objects (PODO) as RESTful web resources by applying [attributes](/server/attributes) to these classes.
 
 ```pascal
 [Path('customers')]
@@ -24,7 +24,7 @@ public
   function InsertCustomer(ACustomer: TCustomer): TCustomer;
 end;
 ```
-WiRL has a strong HTTP content negotiation and  defines [attributes](server/attributes) to bind specific URI patterns and HTTP operations to individual methods of your Delphi class. It has parameter [injection](server/context-injection) attributes so that you can easily pull in information from the HTTP request. It has message [body readers and writers](server/message-body) that allow you to decouple data format marshalling and unmarshalling from your Delphi objects. It has [exception mappers](server/exception-handling) that can map an exception to an HTTP response code and message.
+WiRL has a strong HTTP content negotiation and  defines [attributes](/server/attributes) to bind specific URI patterns and HTTP operations to individual methods of your Delphi class. It has parameter [injection](/server/context-injection) attributes so that you can easily pull in information from the HTTP request. It has message [body readers and writers](/server/entity-providers) that allow you to decouple data format marshalling and unmarshalling from your Delphi objects. It has [exception mappers](/server/exception-handling) that can map an exception to an HTTP response code and message.
 
 WiRL uses 3 submodules (they are github submodules so, ne need to download them manually):
 1. [Delphi JOSE and JWT Library](https://github.com/paolo-rossi/delphi-jose-jwt) for the JSON Web Token creation and validation

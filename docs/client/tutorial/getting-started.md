@@ -195,6 +195,6 @@ In the example, the `Status` property of the response was used. It contains an e
 
 There are many other useful features of WiRL Client such as:
 - [Filter management](/server/filters)
-- [Message body readers and writers](/server/message-body)
+- [Message body readers and writers](/server/entity-providers)
 - [Usage of "vendors" for TWiRLClient](/client/configuration)
 
