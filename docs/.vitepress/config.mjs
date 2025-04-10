@@ -17,7 +17,7 @@ export default withMermaid(
       logo: "/logo-image-only.png",
       nav: [
         { text: "Home", link: "/" },
-        { text: "Guides", link: "/introduction" },
+        { text: "Guides", link: "/concepts/introduction" },
         {
           text: "4.6.0",
           items: [
