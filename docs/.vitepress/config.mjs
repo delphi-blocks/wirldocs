@@ -58,6 +58,7 @@ export default withMermaid(
             { text: "Memory Management", link: "/server/memory-management" },
             { text: "OpenAPI Documentation", link: "/server/openapi" },
             { text: "CORS Configuration", link: "/server/cors" },
+            { text: "SEE & chunked encoding", link: "/server/see-chunked" },
             { text: "Server Tutorials",
               collapsed: true,
               items: [
