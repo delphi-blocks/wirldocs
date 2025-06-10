@@ -1,5 +1,7 @@
 # What is REST?
 
+![REST](/rest.png){class=center-50}
+
 REST (REpresentational State Transfer) is an architectural style for providing standards between computer systems on the web, making it easier for systems to communicate with each other using standard HTTP methods and URLs to interact with resources.
 
 ## Key Principles of REST services (constraints)
@@ -32,7 +34,9 @@ A resource for an order identified by number could be `https://foo.org/myapi.com
 
 ## Verbs in REST
 
-Some of the requests used in REST are as follows:
+![REST](/verbs.png){class=center}
+
+REST uses HTTP verbs, some of the requests used in REST are as follows:
 
 - `GET`: Retrieves a representation of a resource from server to client
 - `POST`: Creates a resource on the server (based on the representation from the client)
