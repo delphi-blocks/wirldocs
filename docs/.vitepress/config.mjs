@@ -38,7 +38,7 @@ export default withMermaid(
           text: "Start Here",
           items: [
             { text: "Introduction", link: "/concepts/introduction" },
-            { text: "Installation", link: "/server/installation" },
+            { text: "Installation", link: "/concepts/installation" },
             { text: "Getting Started", link: "/server/tutorial/getting-started.html" }
           ],
         },
