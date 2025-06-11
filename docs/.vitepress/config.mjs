@@ -35,9 +35,16 @@ export default withMermaid(
 
       sidebar: [
         {
-          text: "WiRL Concepts",
+          text: "Start Here",
           items: [
             { text: "Introduction", link: "/concepts/introduction" },
+            { text: "Installation", link: "/server/installation" },
+            { text: "Getting Started", link: "/server/tutorial/getting-started.html" }
+          ],
+        },
+        {
+          text: "WiRL Concepts",
+          items: [
             { text: "What is REST?", link: "/concepts/rest" },
             { text: "WiRL Features", link: "/concepts/features" },
             { text: "Project Structure", link: "/concepts/structure" },
